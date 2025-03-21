@@ -21,8 +21,8 @@ jobs:
 
     - name: Create release directory
       run: |
-        mkdir -r -p release
-        cp target/release/* release/
+        mkdir -p release
+        find target/release -maxdepth 1 -type f -exec cp {} release/ \;
         cp CHANGELOG.md release/
 
     - name: Create GitHub Release
