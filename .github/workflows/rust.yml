@@ -21,7 +21,7 @@ jobs:
 
     - name: Create release directory
       run: |
-        mkdir -p release
+        mkdir -r -p release
         cp target/release/* release/
         cp CHANGELOG.md release/
 
