@@ -20,6 +20,26 @@ jobs:
       run: |
         wget -qO- https://github.com/git-chglog/git-chglog/releases/download/v0.15.4/git-chglog_0.15.4_linux_amd64.tar.gz | tar xz
         sudo mv git-chglog /usr/local/bin/
+        
+    - name: Create git-chglog config
+      run: |
+        mkdir -p .chglog
+        cat <<EOF > .chglog/config.yml
+        preset: "conventional"
+        style: "github"
+        info:
+          title: "Changelog"
+        options:
+          commit_groups:
+            title_maps:
+              feat: "✨ Features"
+              fix: "🐛 Bug Fixes"
+              docs: "📚 Documentation"
+              refactor: "🔧 Refactoring"
+              perf: "⚡ Performance"
+              test: "✅ Tests"
+              chore: "🛠 Chores"
+        EOF
 
     - name: Generate Changelog
       run: git-chglog -o CHANGELOG.md
